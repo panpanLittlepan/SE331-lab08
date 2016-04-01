@@ -12,20 +12,20 @@ import java.util.Calendar;
 /**
  * Created by pan on 4/1/2016.
  */
-public class ImageUtil {static ImageUtil imageUtil = null;
+public class ImageUtil {
+    static ImageUtil imageUtil = null;
+
     public static ImageUtil getInstance(){
         if (imageUtil == null){
             imageUtil = new ImageUtil();
         }
         return imageUtil;
     }
+
     public static Image getImage(String resourcePath){
         Image image = new Image();
-        ClassLoader classLoader =
-                ImageUtil.getInstance().getClass().getClassLoader();
-
-        File file = new
-                File(classLoader.getResource(resourcePath).getFile());
+        ClassLoader classLoader = ImageUtil.getInstance().getClass().getClassLoader();
+        File file = new File(classLoader.getResource(resourcePath).getFile());
 
         try {
 
