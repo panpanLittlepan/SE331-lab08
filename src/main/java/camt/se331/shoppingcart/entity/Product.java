@@ -32,12 +32,12 @@ public class Product implements Comparable{
         this.images = images;
     }
 
-    public Product(String name, String description, Double totalPrice, Set<Image> images) {
-
+    public Product(Long id,String name, String description, Double price,Image image) {
         this.name = name;
         this.description = description;
-        this.totalPrice = totalPrice;
-        this.images = images;
+        this.totalPrice = price;
+        this.id = id;
+        this.images.add(image);
     }
 
     public Long getId() {

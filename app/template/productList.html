@@ -55,8 +55,8 @@
             <td class="text-right">{{product.totalPrice | number}}</td>
 
             <td >
-                <div ng-repeat="image in product.images" class="textcenter">
-                    <img ngsrc="data:{{image.contentType}};base64,{{image.content}}">
+                <div ng-repeat="image in product.images" class="text-center">
+                    <img ng-src="data:{{image.contentType}};base64,{{image.content}}" class="thumbnail">
                 </div>
             </td>
 

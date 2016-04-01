@@ -53,3 +53,14 @@ labApp.config(function($translateProvider){
     $translateProvider.preferredLanguage('en');
     $translateProvider.fallbackLanguage('en');
 })
+
+labApp.config( [
+     '$compileProvider',
+     function( $compileProvider )
+     {
+
+    $compileProvider.aHrefSanitizationWhitelist(/^\s*(https?|ftp|mailto|file|chrome-extension):/);
+
+    $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|local|data):/);
+ }
+ ]);
