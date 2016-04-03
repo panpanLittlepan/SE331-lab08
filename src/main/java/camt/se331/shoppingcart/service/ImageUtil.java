@@ -15,48 +15,44 @@ import java.util.Calendar;
 /**
  * Created by pan on 4/1/2016.
  */
-
 public class ImageUtil {
-
     static ImageUtil imageUtil = null;
+
     public static ImageUtil getInstance(){
         if (imageUtil == null){
             imageUtil = new ImageUtil();
         }
         return imageUtil;
     }
+
     public static Image getImage(String resourcePath) throws IOException {
+        ImageResize imageResize = new ImageResize();
         Image image = new Image();
         ClassLoader classLoader = ImageUtil.getInstance().getClass().getClassLoader();
-
         File file = new File(classLoader.getResource(resourcePath).getFile());
-        BufferedImage originalImage= ImageIO.read(file);
-        BufferedImage target= Scalr.resize(originalImage,Scalr.Method.QUALITY,
-                200, 200);
+        System.out.println(file);
+
         try {
-
             image.setFileName(file.getName());
-            try {
-                image.setContentType(Files.probeContentType(file.toPath()));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            image.setContentType(Files.probeContentType(file.toPath()));
+            BufferedImage     BuffImage = ImageResize.read(file);
+
             FileInputStream fis = new FileInputStream(file);
-
             ByteArrayOutputStream bos = new ByteArrayOutputStream();
-
-            ImageIO.write(target,"jpg",bos);
-
-
+            byte[] buf = new byte[1024];
+            for (int readNum; (readNum = fis.read(buf)) != -1; ) {
+                bos.write(buf, 0, readNum);
+            }
             image.setContent(bos.toByteArray());
             image.setCreated(Calendar.getInstance().getTime());
+
+            imageResize.resize(BuffImage);
+            imageResize.watermark(BuffImage);
+            imageResize.write(BuffImage, file);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-
         return image;
-
     }
-
 }
