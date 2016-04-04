@@ -63,15 +63,21 @@ productMainController.controller('editProductController', ['$scope', '$http', '$
         $scope.addPerson = false;
         $scope.editPerson = true;
         var id = $routeParams.id;
-        $http.get("/product/" + id).success(function (data) {
+        $http.get("http://localhost:8080/product/" + id).success(function (data) {
             $scope.product = data;
         });
 
-        $scope.editProduct = function () {
+        $scope.editProduct = function (flowFiles) {
             //$http.put("/product", $scope.product).then(function () {
-            productService.update({id:$scope.product.id},$scope.product,function(){
+            productService.update({id:$scope.product.id},$scope.product,function(data){
+                var productid = data.id;
+                flowFiles.opts.target = 'http://localhost:8080/productImage/add';
+                flowFiles.opts.testChunks = false;
+                flowFiles.opts.query ={productid:productid};
+                flowFiles.upload();
                 $rootScope.editSuccess = true;
                 $location.path("listProduct");
+                $scope.$apply();
             });
         }
     }]);
