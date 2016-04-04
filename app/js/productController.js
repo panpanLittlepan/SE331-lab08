@@ -85,6 +85,19 @@ productMainController.controller('editProductController', ['$scope', '$http', '$
                 $location.path("listProduct");
                 $scope.$apply();
             });
-            
         }
+            $scope.removeImage = function (pId, imgId){
+                var ans = confirm("Do you want to delete the image?");
+                if(ans == true){
+                    $http.delete("http://localhost:8080/productImage/remove?productid="+pId+"&imageid="+imgId).then(function (){
+                        $http.get("http://localhost:8080/product"+pId).success(function (data){
+                            $scope.product = data;
+                        });
+                    }, function(){
+                        console.log("FAILED")
+                    });
+                }
+            }
+
+
     }]);

@@ -4,6 +4,12 @@
     </div>
     <div class="row" ng-show="editPerson">
         <h1>Edit Product</h1>
+        <div style="position: relative" ng-repeat="image in product.images" class="text-center">
+            <img ng-src="data:{{image.contentType}};base64,{{image.content}}" class="thumbnail"/>
+            <button style="position: absolute; top: 5px; left: 5px; z-index: 999" href="#" ng-click="removeImage(product.id, image.id)">
+                <i class="glyphicon glyphicon-remove-circle"></i>
+            </button>
+        </div>
     </div>
     <div class="col-md-4">
         <form name="editform" novalidate flow-init>
@@ -40,9 +46,7 @@
                     Price is Required!
                 </div>
 
-                <div ng-repeat="image in product.images" class="text-center">
-                    <img ng-src="data:{{image.contentType}};base64,{{image.content}}" class="thumbnail">
-                </div>
+
 
                 <div>
                     <input type="file" flow-btn />
