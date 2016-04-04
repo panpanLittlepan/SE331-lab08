@@ -2,6 +2,7 @@
     <div class="row" ng-show="addPerson">
         <h1>Add new product</h1>
     </div>
+
     <div class="row" ng-show="editPerson">
         <h1>Edit Product</h1>
         <div style="position: relative" ng-repeat="image in product.images" class="text-center">
@@ -11,6 +12,7 @@
             </button>
         </div>
     </div>
+    
     <div class="col-md-4">
         <form name="editform" novalidate flow-init>
             <div class="form-group">
