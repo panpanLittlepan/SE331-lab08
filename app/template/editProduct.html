@@ -40,6 +40,10 @@
                     Price is Required!
                 </div>
 
+                <div ng-repeat="image in product.images" class="text-center">
+                    <img ng-src="data:{{image.contentType}};base64,{{image.content}}" class="thumbnail">
+                </div>
+
                 <div>
                     <input type="file" flow-btn />
                     <table>
